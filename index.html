@@ -266,7 +266,7 @@ async function loadAll(){
   }
   return out;
 }
-async function put(r){const {error}=await sb.from("recipes").upsert({recipe_key:r.id,data:r},{onConflict:"recipe_key"});if(error)throw error}
+async function put(r){const {error}=await sb.from("recipes").upsert({recipe_key:r.id,title:r.name||"ללא שם",data:r},{onConflict:"recipe_key"});if(error)throw error}
 async function del(id){const {error}=await sb.from("recipes").delete().eq("recipe_key",id);if(error)throw error}
 async function uploadImage(blob,folder){
   const path=folder+"/"+Date.now()+"_"+Math.random().toString(36).slice(2,8)+".jpg";
@@ -289,7 +289,7 @@ function removeFiles(urls){
 }
 async function saveHero(dataUrl){
   const b=await (await fetch(dataUrl)).blob();const url=await uploadImage(b,"hero");
-  const {error}=await sb.from("recipes").upsert({recipe_key:"__hero",data:{photo:url}},{onConflict:"recipe_key"});
+  const {error}=await sb.from("recipes").upsert({recipe_key:"__hero",title:"__hero",data:{photo:url}},{onConflict:"recipe_key"});
   if(error)throw error;
   const old=hero;hero=url;if(old)removeFiles([old]);
 }
