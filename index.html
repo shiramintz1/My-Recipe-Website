@@ -173,6 +173,16 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:30px 16px 100
 @media print{nav,.bar,.hero,footer,.thumbs{display:none!important}.modal{position:static;background:none;padding:0}.sheet{box-shadow:none}body>*:not(.modal){display:none}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
+/* המרת מידות */
+.conv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:16px}
+.cv{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 20px}
+.cv h3{margin:0 0 8px;font-size:20px;color:var(--link)}
+.cv .ln{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+.cv .ln:last-child{border:0}.cv .ln b{white-space:nowrap}
+.cnotes{background:var(--surface);border-right:5px solid var(--butter);border-radius:12px;padding:14px 22px;margin-top:18px}
+.cnotes ol{margin:6px 0 0;padding-right:20px}
+@media(max-width:900px){.conv{grid-template-columns:1fr}}
+
 /* ערכות נושא */
 input,textarea,select{background:var(--surface)}
 .btn,.nav-add,.nav-add:hover,.chip.on,.tag.t,.seg button.on{color:var(--on-a)}
@@ -211,6 +221,7 @@ nav{background:color-mix(in srgb,var(--bg) 92%,transparent)}
   <button class="logo" data-go="home">מחברת <span>המתכונים</span></button>
   <button class="nl" data-go="home"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg><span class="t">בית</span></button>
   <button class="nl" data-go="recipes"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.500" y="3" width="7.500" height="7.500" rx="2"/><rect x="3" y="13.500" width="7.500" height="7.500" rx="2"/><rect x="13.500" y="13.500" width="7.500" height="7.500" rx="2"/></svg><span class="t">מתכונים</span></button>
+  <button class="nl" data-go="conv"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L20 4M7 4v6M4 7h6M14 17h6"/></svg><span class="t">מידות</span></button>
   <button class="nl nav-add" id="navAdd" aria-label="מתכון חדש" style="display:none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span class="t">מתכון חדש</span></button>
   <button class="nl" data-go="fav"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.500s-8-5-8-10.500a4.500 4.500 0 0 1 8-2.800 4.500 4.500 0 0 1 8 2.800c0 5.500-8 10.500-8 10.500z"/></svg><span class="t">מועדפים</span></button>
   <div class="mw"><button class="nl" id="themeBtn" aria-haspopup="true" aria-label="תצוגה וערכות נושא"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg><span class="t">תצוגה</span></button><div class="pop tp" id="themePop"></div></div>
@@ -333,10 +344,11 @@ function card(r){
 /* ---------- ניווט ---------- */
 function go(v,f){view=v;if(v==="fav"){view="recipes";f="fav"}if(f)filter=f;else if(v==="recipes")filter="all";render();scrollTo({top:0})}
 function render(){
-  document.querySelectorAll(".nl[data-go]").forEach(b=>b.classList.toggle("on",(b.dataset.go==="home"&&view==="home")||(b.dataset.go==="recipes"&&view==="recipes"&&filter!=="fav")||(b.dataset.go==="fav"&&view==="recipes"&&filter==="fav")));
+  document.querySelectorAll(".nl[data-go]").forEach(b=>b.classList.toggle("on",(b.dataset.go==="home"&&view==="home")||(b.dataset.go==="recipes"&&view==="recipes"&&filter!=="fav")||(b.dataset.go==="fav"&&view==="recipes"&&filter==="fav")||(b.dataset.go==="conv"&&view==="conv")));
+  if(view==="conv"){conv();$("where").textContent=admin?"מחוברת כמנהלת. השינויים נשמרים בענן. מומלץ ללחוץ מדי פעם על ״עוד״ ← ״גיבוי לקובץ״.":"מחברת המתכונים שלי";return}
   if(!loaded){$("app").innerHTML=`<div class="page"><p class="sub">טוען מתכונים…</p></div>`;return}
   if(loadErr){$("app").innerHTML=`<div class="page"><div class="empty"><h3>לא הצלחנו לטעון את המתכונים</h3><p>${esc(loadErr)}</p><button class="btn" onclick="location.reload()">נסי שוב</button></div></div>`;return}
-  view==="home"?home():list();
+  view==="home"?home():view==="conv"?conv():list();
   $("where").textContent=admin?"מחוברת כמנהלת. השינויים נשמרים בענן. מומלץ ללחוץ מדי פעם על ״עוד״ ← ״גיבוי לקובץ״.":"מחברת המתכונים שלי";
 }
 function home(){
@@ -375,6 +387,25 @@ function fill(){
   const l=sorted(recipes.filter(r=>matches(r,filter)&&(!s||[r.name,r.category,r.type,r.taste,r.ingredients,r.steps,r.tips,r.notes].join(" ").toLowerCase().includes(s))));
   $("cnt").textContent=l.length===1?"מתכון אחד":l.length+" מתכונים";
   $("lg").innerHTML=l.length?l.map(card).join(""):`<div class="empty"><h3>${recipes.length?"לא נמצאו מתכונים":"עוד אין מתכונים"}</h3><p>${recipes.length?"נסי חיפוש או סינון אחר.":(admin?"הוסיפי את המתכון הראשון.":"עוד לא נוספו מתכונים.")}</p>${!recipes.length&&admin?`<button class="btn" data-add>הוספת מתכון</button>`:""}</div>`;
+}
+
+/* ---------- המרת מידות ---------- */
+const CONV=[
+["חומרי בסיס",[["כוס קמח","140 גרם | כף = 10 גרם"],["כוס קמח מלא","125 גרם | כף = 8 גרם"],["כוס קורנפלור","140 גרם | כף = 10 גרם"],["כוס קקאו","140 גרם | כף = 10 גרם"],["כוס סולת","200 גרם | כף = 10 גרם"],["כוס אבקת סוכר","120 גרם | כף = 8 גרם"],["כוס סוכר / סוכר דמררה","200 גרם | כף = 10 גרם"],["כוס (דחוסה) סוכר חום כהה","240 גרם | כף = 15 גרם"],["כף מלח","20 גרם | כפית = 5 גרם"]]],
+["חומרי התפחה וייצוב",[["כפית אבקת אפייה","5 גרם"],["כפית סודה לשתייה","5 גרם"],["כפית שמרים יבשים","5 גרם"],["כף אינסטנט פודינג וניל","10 גרם"],["שקית אבקת ג׳לטין","14 גרם | כפית = 5 גרם"],["כפית פקטין","5 גרם"]]],
+["יבשים ותבלינים",[["כוס פרג טחון","100 גרם"],["כוס שקדים / אגוזים טחונים","100 גרם"],["כוס אגוזים קצוצים","85 גרם"],["כוס שיבולת שועל","100 גרם"],["כוס קוקוס","100 גרם"],["כף קינמון טחון","10 גרם | כפית = 5 גרם"],["כפית הל טחון","5 גרם"],["כפית נס קפה","5 גרם"]]],
+["נוזלים, סירופים ורטבים",[["כוס דבש / סילאן","360 גרם | כף = 20 גרם"],["כוס סירופ תירס / גלוקוזה","360 גרם | כף = 20 גרם"],["כוס מייפל אמתי","240 מ״ל"],["כוס שמן","200 גרם"],["כוס שמן קוקוס","200 גרם"],["כוס שמנת מתוקה","240 מ״ל | מיכל = 250 מ״ל"],["מיכל שמנת חמוצה","200 מ״ל"],["מיכל יוגורט","200 מ״ל"],["כוס חלב / חלב סויה","240 מ״ל | כף = 15 מ״ל"],["כוס מים","240 מ״ל | כף = 15 מ״ל"],["כוס מיץ תפוזים / מיץ לימון","240 מ״ל | כף = 15 מ״ל"],["כף אספרסו (המשקה)","15 מ״ל"]]],
+["ממרחים ותוספות",[["כוס ריבת חלב","400 גרם"],["כוס ריבה","330 גרם"],["כוס חמאת בוטנים","250 גרם"],["כוס נוטלה","280 גרם"],["כוס ממרח חלבה","400 גרם"],["כוס טחינה גולמית","240 גרם"],["כוס פירות יער קפואים","125 גרם"],["כוס שוקולד צ׳יפס","200 גרם"],["פחית קרם / חלב קוקוס","400 גרם"],["פחית חלב מרוכז ממותק","398 גרם"]]],
+["ביצים (גודל L בלבד)",[["חלמון גודל L","20-25 גרם"],["חלבון גודל L","35-40 גרם"]]]
+];
+const CNOTES=["המרת שמרים: כדי להמיר שמרים יבשים לטריים יש להכפיל פי 3 (למשל: 10 גרם שמרים יבשים = 30 גרם שמרים טריים).","בכל המתכונים מומלץ להשתמש בביצים בגודל L לקבלת תוצאות מדויקות.","מומלץ להשתמש בשמן צמחי בעל טעם ניטרלי כמו שמן קנולה, חמניות, תירס או סויה.","שמן קוקוס משמש כתחליף מוצלח לחמאה (לא תמיד ובהתאם למתכון).","שמן זית מתאים במתכונים ספציפיים בלבד ועדיף לא לאפות איתו באופן קבוע.","לא כל מתכון אפשר או כדאי להמיר למידות בנפח.","מתכונים מסובכים ו/או בעלי מצרכים רבים (למשל מקרונים או עוגות רושם) מומלץ להכין על פי מידות משקל בלבד."];
+function conv(){
+  const s=(window._cq||"").toLowerCase();
+  $("app").innerHTML=`<div class="page"><h1>המרת מידות</h1>
+  <div class="tools"><input id="cq" type="search" placeholder="חיפוש מוצר, למשל קמח" value="${esc(window._cq||"")}" aria-label="חיפוש"></div>
+  <div class="conv">${CONV.map(([t,rows])=>{const f=rows.filter(([n,v])=>!s||(n+" "+v).toLowerCase().includes(s));return f.length?`<div class="cv"><h3>${esc(t)}</h3>${f.map(([n,v])=>`<div class="ln"><span>${esc(n)}</span><b>${esc(v)}</b></div>`).join("")}</div>`:""}).join("")}</div>
+  <div class="cnotes"><b>הערות חשובות</b><ol>${CNOTES.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div></div>`;
+  $("cq").oninput=e=>{window._cq=e.target.value.trim();const p=e.target.selectionStart;conv();$("cq").focus();$("cq").setSelectionRange(p,p)};
 }
 
 /* ---------- חלון ---------- */
