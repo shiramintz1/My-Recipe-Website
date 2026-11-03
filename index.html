@@ -183,6 +183,12 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:30px 16px 100
 .cnotes ol{margin:6px 0 0;padding-right:20px}
 @media(max-width:900px){.conv{grid-template-columns:1fr}}
 
+/* צור קשר וזכויות */
+.copy{margin-top:8px;font-size:13px;color:var(--muted)}
+.copy button{background:none;color:var(--link);padding:0 4px;font-size:13px;font-weight:700;text-decoration:underline}
+.ct{max-width:420px;margin:auto;text-align:center}
+.ct{text-align:right}.ct h2{text-align:center}.ct .f{margin-top:14px}.ct textarea{min-height:130px}.ct .btn{width:100%;margin-top:18px}
+
 /* ערכות נושא */
 input,textarea,select{background:var(--surface)}
 .btn,.nav-add,.nav-add:hover,.chip.on,.tag.t,.seg button.on{color:var(--on-a)}
@@ -213,30 +219,6 @@ nav{background:color-mix(in srgb,var(--bg) 92%,transparent)}
   .pop{position:fixed;left:10px;right:10px;bottom:76px;top:auto;min-width:0}
   .mw{flex:1;display:flex;min-width:0}.nl{min-width:0}
 }
-
-/* ייבוא ו-טיימר */
-.hz{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.ibox{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:14px}
-.ibox ol{margin:0 0 14px;padding-right:20px}
-.qph{position:absolute;bottom:10px;right:10px;background:var(--surface);color:var(--ink);font-size:13px;padding:6px 14px;box-shadow:0 2px 10px #0003}
-.pv{background:var(--surface);border:1px solid var(--line);border-radius:14px;margin:8px 0}
-.pv summary{display:flex;gap:10px;align-items:center;padding:12px 14px;cursor:pointer;list-style:none}
-.pv summary::-webkit-details-marker{display:none}
-.pv summary input{width:22px;height:22px;flex:none;padding:0;accent-color:var(--sage)}
-.pv summary b{flex:1;overflow-wrap:anywhere}
-.pv .fg{padding:4px 14px 16px}.pv.dup{opacity:.65}
-.tbtn{background:var(--sage-l);color:var(--link);padding:2px 10px;font-size:13px;margin-right:8px;vertical-align:middle}
-.tcard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:18px 0}
-.tray{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);width:min(460px,calc(100% - 24px));z-index:80;display:flex;flex-direction:column;gap:8px}
-.tmr{background:var(--ink);color:var(--bg);border-radius:18px;padding:10px 14px;display:flex;align-items:center;gap:8px;box-shadow:0 10px 30px #0006}
-.tmr.done{background:#c0392b;color:#fff;animation:pulse 1s infinite}
-.tmr .tt{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;min-width:80px}
-.tmr .tl2{flex:1;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tmr button{padding:6px 12px;font-size:13px;background:#ffffff2e;color:inherit}
-@keyframes pulse{50%{opacity:.7}}
-@media(prefers-reduced-motion:reduce){.tmr.done{animation:none}}
-@media(max-width:640px){.tray{bottom:76px}body.adm .nl{padding:6px 0;font-size:10px}body.adm .nl .t{font-size:10px}body.adm .nl svg{width:20px;height:20px}}
-@media print{.tray{display:none}}
 </style>
 </head>
 <body>
@@ -246,7 +228,6 @@ nav{background:color-mix(in srgb,var(--bg) 92%,transparent)}
   <button class="nl" data-go="home"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg><span class="t">בית</span></button>
   <button class="nl" data-go="recipes"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.500" y="3" width="7.500" height="7.500" rx="2"/><rect x="3" y="13.500" width="7.500" height="7.500" rx="2"/><rect x="13.500" y="13.500" width="7.500" height="7.500" rx="2"/></svg><span class="t">מתכונים</span></button>
   <button class="nl" data-go="conv"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L20 4M7 4v6M4 7h6M14 17h6"/></svg><span class="t">מידות</span></button>
-  <button class="nl" id="navImp" data-go="import" style="display:none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M12 18v-6M9.500 14.500L12 12l2.500 2.500"/></svg><span class="t">ייבוא PDF</span></button>
   <button class="nl nav-add" id="navAdd" aria-label="מתכון חדש" style="display:none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span class="t">מתכון חדש</span></button>
   <button class="nl" data-go="fav"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.500s-8-5-8-10.500a4.500 4.500 0 0 1 8-2.800 4.500 4.500 0 0 1 8 2.800c0 5.500-8 10.500-8 10.500z"/></svg><span class="t">מועדפים</span></button>
   <div class="mw"><button class="nl" id="themeBtn" aria-haspopup="true" aria-label="תצוגה וערכות נושא"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg><span class="t">תצוגה</span></button><div class="pop tp" id="themePop"></div></div>
@@ -258,17 +239,16 @@ nav{background:color-mix(in srgb,var(--bg) 92%,transparent)}
       <button id="impBtn">שחזור מגיבוי<small>טוען קובץ גיבוי קודם</small></button>
       <button id="loginBtn">כניסה למנהלת<small>לעריכת המתכונים</small></button>
       <button id="outBtn">יציאה<small>התנתקות מהניהול</small></button>
+      <button id="contactBtn">צור קשר<small>שליחת הודעה באימייל</small></button>
     </div>
   </div>
   <input id="imp" type="file" accept=".json" hidden><input id="herof" type="file" accept="image/*" hidden>
 </div></nav>
 
 <main id="app"></main>
-<footer id="where"></footer>
+<footer><div id="where"></div><div class="copy">כל הזכויות שמורות לשירה מייזליש - 0534151819 · <button type="button" id="contactLink">צור קשר</button></div></footer>
 <div class="modal" id="modal" role="dialog" aria-modal="true"><div class="sheet" id="sheet"></div></div>
 <div id="toast" role="status"></div>
-<div class="tray" id="tray" aria-live="polite"></div>
-<input id="qphf" type="file" accept="image/*" multiple hidden>
 
 <script>
 /* ===== הגדרות Supabase: להחליף בפרטים שלך ===== */
@@ -335,7 +315,7 @@ function toast(t){const m=$("toast");m.textContent=t;m.style.display="block";cle
 
 /* ---------- מצב מנהלת ---------- */
 function chrome(){
-  $("navAdd").style.display=admin?"":"none";$("navImp").style.display=admin?"":"none";document.body.classList.toggle("adm",admin);
+  $("navAdd").style.display=admin?"":"none";
   ["heroBtn","exp","impBtn","outBtn"].forEach(id=>$(id).style.display=admin?"":"none");
   $("loginBtn").style.display=admin?"none":"";
 }
@@ -356,14 +336,14 @@ function loginForm(){
 }
 
 /* ---------- עזרים ---------- */
-const matches=(r,k)=>k==="all"||(k==="nophoto"?!r.photos.length:k==="fav"?r.fav:k==="quick"?r.quick:["חלבי","בשרי","פרווה"].includes(k)?r.type===k:["מלוח","מתוק"].includes(k)?r.taste===k:k.startsWith("cat:")&&r.category===k.slice(4));
+const matches=(r,k)=>k==="all"||(k==="fav"?r.fav:k==="quick"?r.quick:["חלבי","בשרי","פרווה"].includes(k)?r.type===k:["מלוח","מתוק"].includes(k)?r.taste===k:k.startsWith("cat:")&&r.category===k.slice(4));
 const count=k=>recipes.filter(r=>matches(r,k)).length;
 const sorted=l=>[...l].sort((a,b)=>sort==="az"?(a.name||"").localeCompare(b.name||"","he"):b.created-a.created);
 const firstPhoto=k=>{const r=sorted(recipes.filter(r=>matches(r,k)&&r.photos.length))[0];return r?r.photos[0]:""};
 function card(r){
   const t=[r.prep&&"הכנה "+r.prep+" דק׳",r.cook&&"בישול "+r.cook+" דק׳",r.bake&&"אפייה "+r.bake+" דק׳"].filter(Boolean).join(" · ");
   return `<div class="card" data-open="${esc(r.id)}" tabindex="0" role="button" aria-label="פתיחת ${esc(r.name)}">
-  <div class="cover">${r.photos[0]?`<img src="${esc(r.photos[0])}" alt="${esc(r.name)}" loading="lazy">`:`<div class="np">${PLATE}<span>עוד אין תמונה</span></div>`}${r.photos.length>1?`<span class="pc">${r.photos.length} תמונות</span>`:""}${admin&&!r.photos.length?`<button class="qph" data-qph="${esc(r.id)}">+ הוספת תמונה</button>`:""}</div>
+  <div class="cover">${r.photos[0]?`<img src="${esc(r.photos[0])}" alt="${esc(r.name)}" loading="lazy">`:`<div class="np">${PLATE}<span>עוד אין תמונה</span></div>`}${r.photos.length>1?`<span class="pc">${r.photos.length} תמונות</span>`:""}</div>
   ${admin?`<button class="hb" data-fav="${esc(r.id)}" aria-label="${r.fav?"הסרה מהמועדפים":"הוספה למועדפים"}">${HEART(r.fav)}</button>`:""}
   <h3>${esc(r.name)}</h3>
   <div class="sub"><span class="dot" style="background:${DOT[r.type]||"#999"}"></span>${esc(r.type)} · ${esc(r.taste)}${r.category?" · "+esc(r.category):""}</div>${t?`<div class="sub">${esc(t)}</div>`:""}</div>`}
@@ -371,11 +351,11 @@ function card(r){
 /* ---------- ניווט ---------- */
 function go(v,f){view=v;if(v==="fav"){view="recipes";f="fav"}if(f)filter=f;else if(v==="recipes")filter="all";render();scrollTo({top:0})}
 function render(){
-  document.querySelectorAll(".nl[data-go]").forEach(b=>b.classList.toggle("on",(b.dataset.go==="home"&&view==="home")||(b.dataset.go==="recipes"&&view==="recipes"&&filter!=="fav")||(b.dataset.go==="fav"&&view==="recipes"&&filter==="fav")||(b.dataset.go==="conv"&&view==="conv")||(b.dataset.go==="import"&&view==="import")));
+  document.querySelectorAll(".nl[data-go]").forEach(b=>b.classList.toggle("on",(b.dataset.go==="home"&&view==="home")||(b.dataset.go==="recipes"&&view==="recipes"&&filter!=="fav")||(b.dataset.go==="fav"&&view==="recipes"&&filter==="fav")||(b.dataset.go==="conv"&&view==="conv")));
   if(view==="conv"){conv();$("where").textContent=admin?"מחוברת כמנהלת. השינויים נשמרים בענן. מומלץ ללחוץ מדי פעם על ״עוד״ ← ״גיבוי לקובץ״.":"מחברת המתכונים שלי";return}
   if(!loaded){$("app").innerHTML=`<div class="page"><p class="sub">טוען מתכונים…</p></div>`;return}
   if(loadErr){$("app").innerHTML=`<div class="page"><div class="empty"><h3>לא הצלחנו לטעון את המתכונים</h3><p>${esc(loadErr)}</p><button class="btn" onclick="location.reload()">נסי שוב</button></div></div>`;return}
-  view==="home"?home():view==="conv"?conv():view==="import"?importView():list();
+  view==="home"?home():view==="conv"?conv():list();
   $("where").textContent=admin?"מחוברת כמנהלת. השינויים נשמרים בענן. מומלץ ללחוץ מדי פעם על ״עוד״ ← ״גיבוי לקובץ״.":"מחברת המתכונים שלי";
 }
 function home(){
@@ -400,9 +380,9 @@ function home(){
 }
 function list(){
   const cats=[...new Set(recipes.map(r=>r.category).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"he"));
-  $("app").innerHTML=`<div class="page"><h1>${filter==="fav"?"המועדפים":filter==="nophoto"?"מתכונים שמחכים לתמונה":"כל המתכונים"}</h1>
+  $("app").innerHTML=`<div class="page"><h1>${filter==="fav"?"המועדפים":"כל המתכונים"}</h1>
   <div class="tools"><input id="lq" type="search" placeholder="חיפוש לפי שם, מרכיב או טיפ" value="${esc(q)}" aria-label="חיפוש"><select id="ls" aria-label="מיון"><option value="new">החדשים קודם</option><option value="az">לפי שם</option></select></div>
-  <div class="chips">${[...CHIPS,...(admin?[["nophoto","ללא תמונה"]]:[]),...cats.map(c=>["cat:"+c,c])].map(([k,l])=>`<button class="chip${k===filter?" on":""}" data-f="${esc(k)}">${esc(l)}</button>`).join("")}</div>
+  <div class="chips">${[...CHIPS,...cats.map(c=>["cat:"+c,c])].map(([k,l])=>`<button class="chip${k===filter?" on":""}" data-f="${esc(k)}">${esc(l)}</button>`).join("")}</div>
   <div class="sub" id="cnt" style="margin:4px 0 16px"></div><div class="grid" id="lg"></div></div>`;
   $("ls").value=sort;
   $("lq").oninput=e=>{q=e.target.value.trim();fill()};
@@ -451,9 +431,8 @@ function show(id){
   <div class="body"><h2 class="title">${esc(r.name)}</h2>
   <div class="tags"><span class="tag t">${esc(r.type)}</span><span class="tag">${esc(r.taste)}</span>${r.category?`<span class="tag">${esc(r.category)}</span>`:""}${r.quick?`<span class="tag">מהיר</span>`:""}</div>
   ${st.length?`<div class="stats">${st.map(([k,v])=>`<div class="stat">${k}<b>${esc(v)}</b></div>`).join("")}</div>`:""}
-  ${timerCard(r)}
   ${r.ingredients?`<h3>מרכיבים <small style="font-size:13px;color:var(--muted);font-weight:500">(לחצי כדי לסמן)</small></h3>${lines(r.ingredients).map(x=>`<div class="ing" role="checkbox" aria-checked="false" tabindex="0">${esc(x)}</div>`).join("")}`:""}
-  ${r.steps?`<h3>אופן ההכנה</h3>${lines(r.steps).map((x,i)=>`<div class="step"><i>${i+1}</i><div>${esc(x.replace(/^\d+[.)]\s*/,""))}${stepBtns(x,r.name,i)}</div></div>`).join("")}`:""}
+  ${r.steps?`<h3>אופן ההכנה</h3>${lines(r.steps).map((x,i)=>`<div class="step"><i>${i+1}</i><div>${esc(x.replace(/^\d+[.)]\s*/,""))}</div></div>`).join("")}`:""}
   ${r.tips?`<h3>טיפים ונקודות לזכור</h3><div class="tip">${esc(r.tips)}</div>`:""}
   ${r.notes?`<h3>הערות אישיות</h3><div class="note">${esc(r.notes)}</div>`:""}</div>`);
 }
@@ -517,163 +496,12 @@ async function save(e){
   }
 }
 
-/* ---------- ייבוא מתכונים מקובץ PDF ---------- */
-/* ---------- ניתוח טקסט למתכונים ---------- */
-const BIDI=/[\u200e\u200f\u202a-\u202e\u2066-\u2069\ufeff]/g,EMO=/[\u{1F000}-\u{1FAFF}\u2600-\u27BF\uFE0F]/gu;
-const VERBS="מרתיחים|מבשלים|מטגנים|מערבבים|מוסיפים|מכניסים|מקלפים|מחממים|מניחים|מפזרים|מורחים|מקציפים|מסננים|מתבלים|מגישים|מוזגים|מצפים|מקררים|מקפיאים|מכסים|מגלגלים|מחלקים|מעבירים|מכינים|מוציאים|מורידים|ממיסים|מסדרים|מרטיבים|מקפלים|אופים|חותכים|שופכים|לוקחים|קוצצים|גורדים|שמים|טוחנים|מועכים|יוצקים|שוטפים|משרים|ממלאים|מרססים|מערבלים|מפרידים|מצננים|מפוררים|מרסקים|מזגגים|מקשטים|מתיכים|מנפים|מחברים|מפעילים|מדביקים|לשים|שומרים|משאירים|מכוונים|מתחילים|מדליקים|מאפים|מעבדים|מטחינים|מחתכים|מצליחים|מרחיבים|מכינים".replace(/\|/g,"|");
-const INFS="בשל|טגן|ערבב|הוסיף|אפות|חתוך|קצוץ|לוש|הקציף|שפוך|פזר|חמם|הכניס|הוציא|קלף|מרוח|מלא|גרד|רסק|מעוך|המיס|סנן|תבל|הגיש|קפל|גלגל|צפות|הפריד|חלק|הפוך|הרתיח|הניח|השרות|טחון|מזוג|צנן|הקפיא|הוריד|סדר|שים|קחת|התחיל|בצע|גרוס|פרוס|פרק|מדוד|הפעיל|התיך|הקרים|ערבל|פרוש|קרר|שמור|נפות|חבר|הדביק|הפעל|הכין|העביר|זגג|קשט".replace(/\|/g,"|");
-const STEPV=new RegExp("^ו?(?:(?:"+VERBS+")|ל(?:"+INFS+")[א-ת]*)(?=\\s|$|,)");
-const isStep=(l,p)=>!/:$/.test(l)&&!(p&&/:$/.test(p)&&!STEPV.test(l))&&(STEPV.test(l)||(/[.!?]$/.test(l)&&l.split(" ").length>=4)||l.length>55);
-const cleanLine=s=>s.replace(BIDI,"").replace(EMO,"").replace(/(\d)([א-ת])/g,"$1 $2").replace(/\s+([,;:.!?])(?=\s|$)/g,"$1").replace(/\s+([,;:])(?=[א-ת])/g,"$1 ").replace(/([,;:])(?=[א-ת])/g,"$1 ").replace(/\s+/g," ").trim();
-const FWD=["כוס","מלח","שמן","ביצים","קמח","סוכר","דקות","מערבבים","מוסיפים","בתיאבון","מים","תנור"];
-function maybeFlip(lines){const rev=w=>[...w].reverse().join(""),t=lines.join("\n");let f=0,r=0;FWD.forEach(w=>{f+=t.split(w).length-1;r+=t.split(rev(w)).length-1});
-  return r>f*1.5?lines.map(l=>rev(l).replace(/\d+/g,m=>rev(m))):lines}
-function guess(name,ing,steps){
-  const all=(name+" "+ing+" "+steps).replace(/אבקת (?:מרק )?(?:עוף|בקר|בשר)|קובי(?:ית|ות) (?:מרק )?(?:עוף|בשר)/g,"");
-  const dairy=/חמאה|חלב|גבינה|שמנת|יוגורט|קוטג|מסקרפונה|פרמזן|מוצרלה|ריבת חלב/.test(all);
-  const type=/עוף|בשר|בקר|הודו|נקניק|שניצל|פרגית|פרגיות|כבד|המבורגר/.test(all)&&!dairy?"בשרי":dairy?"חלבי":"פרווה";
-  const category=/^עוגת|^עוגה|שיש/.test(name)?"עוגות":/עוגיות|כדורי|שושני|חיתוכיות|ריבועי|קוקילידות|פצפוצי|שומשומיות/.test(name)?"עוגיות וממתקים":/מרק/.test(name)?"מרקים":/סלט/.test(name)?"סלטים":/לחם|לחמניות|פיצה|פוקצ|לחוח|פרנה|רוגעלך|פריושקי|בייגלה/.test(name)?"לחמים ומאפים":/קרפ|פנקייק|וופל|סופגניות|צ'ורוס|אלפחורס|פחזניות|סופלה|מעדן|קרם|אייס|משקה/.test(name)?"קינוחים":/פסטה|אורז|תפוחי אדמה|קוגל|פשטיד|קציצות|פרגיות|רוטב/.test(name)?"ארוחות":"";
-  const taste=["מרקים","ארוחות","סלטים"].includes(category)?"מלוח":["עוגות","עוגיות וממתקים","קינוחים"].includes(category)?"מתוק":category==="לחמים ומאפים"?(/שוקולד|קינמון|רוגעלך/.test(name+" "+ing)?"מתוק":"מלוח"):/סוכר|שוקולד|קקאו|דבש|סירופ|פודינג|נוטלה|וניל/.test(name+" "+ing)?"מתוק":"מלוח";
-  return{type,taste,category}}
-function recTimes(steps){
-  let bake=0,cook=0;const t=(steps.match(/(\d{2,3})\s*[-–]?\s*(?:מעלות|°)/)||[])[1]||"";
-  steps.split(/(?<=[.!?])\s+|\n/).forEach(s=>{const m=s.match(/(\d+)(?:\s*[-–]\s*(\d+))?\s*[-–]?\s*(?:דקות|דק'|דק׳)/);if(!m)return;const n=+(m[2]||m[1]);
-    if(/אפ|אופ|תנור/.test(s))bake=Math.max(bake,n);else if(/בשל|מרתיח|שמים/.test(s))cook=Math.max(cook,n)});
-  return{bake:bake||"",cook:cook||"",temp:t}}
-function parseBlock(lines){
-  lines=lines.filter(Boolean);if(lines.length<2)return null;
-  let raw=lines[0],rest=lines.slice(1),credit="",servings="";
-  const sv=raw.match(/\(([^)]*\d[^)]*)\)\s*$/);if(sv){servings=sv[1].trim();raw=raw.replace(sv[0],"").trim()}
-  const parts=raw.split(/\s+\/\s*|\s*\/\s+/);raw=parts[0].trim();if(parts[1])credit=parts.slice(1).join(" / ").trim();
-  let k=rest.findIndex((l,i)=>isStep(l,rest[i-1]));if(k<0)k=rest.length;
-  const ing=rest.slice(0,k),st=rest.slice(k),steps=[];let cur="";
-  st.forEach(l=>{if(cur&&(/[.!?]$/.test(cur)||(STEPV.test(l)&&!/[,־-]$/.test(cur))))
-    {steps.push(cur);cur=l}else cur=cur?cur+" "+l:l});if(cur)steps.push(cur);
-  const flat=[];steps.forEach(s=>s.split(/(?<=[.!?])\s+(?=\S)/).forEach(x=>{x=x.replace(/^\d+[.)]\s*/,"").trim();if(x)flat.push(x)}));
-  const ingredients=ing.join("\n"),stepsT=flat.join("\n"),g=guess(raw,ingredients,stepsT),tm=recTimes(stepsT);
-  return{name:raw,servings,ingredients,steps:stepsT,notes:credit?"מקור: "+credit:"",type:g.type,taste:g.taste,category:g.category,prep:"",cook:tm.cook,bake:tm.bake,temp:tm.temp}}
-function parseRecipes(text){
-  let lines=text.split(/\r?\n/).map(cleanLine);
-  lines=lines.filter(l=>!/^(?:בס"ד|בס״ד|בע"ה|בעזרת השם|בס'ד)$/.test(l));
-  lines=maybeFlip(lines);
-  const blocks=[];let cur=[];
-  lines.forEach(l=>{if(/^(?:בתיאבון!?|[-*_=]{3,})$/.test(l)||/^בתיאבון\b/.test(l)){if(cur.length)blocks.push(cur);cur=[]}else cur.push(l)});
-  if(cur.filter(Boolean).length)blocks.push(cur);
-  return blocks.map(parseBlock).filter(Boolean)}
-
-
-let impList=[],qphId="",pdfjsP=null;
-function loadPdfjs(){return pdfjsP||(pdfjsP=new Promise((ok,no)=>{if(window.pdfjsLib)return ok(window.pdfjsLib);const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js";
-  s.onload=()=>{pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";ok(window.pdfjsLib)};
-  s.onerror=()=>{pdfjsP=null;no(new Error("לא הצלחנו לטעון את רכיב קריאת ה-PDF. בדקי את חיבור האינטרנט, או הדביקי את הטקסט ידנית."))};document.head.appendChild(s)}))}
-async function pdfText(file){
-  const lib=await loadPdfjs(),pdf=await lib.getDocument({data:await file.arrayBuffer()}).promise,out=[];
-  for(let n=1;n<=pdf.numPages;n++){
-    const tc=await (await pdf.getPage(n)).getTextContent(),rows=[];
-    tc.items.forEach(i=>{if(!i.str||!i.str.trim())return;const y=i.transform[5],h=Math.abs(i.transform[3])||10;let r=rows.find(r=>Math.abs(r.y-y)<h*.45);if(!r){r={y,h,items:[]};rows.push(r)}r.items.push(i)});
-    rows.sort((a,b)=>b.y-a.y);let py=null;
-    rows.forEach(r=>{const heb=r.items.some(i=>/[א-ת]/.test(i.str));
-      r.items.sort((a,b)=>heb?b.transform[4]-a.transform[4]:a.transform[4]-b.transform[4]);
-      let line="",last=null;
-      r.items.forEach(i=>{if(last){const gap=heb?last.transform[4]-(i.transform[4]+i.width):i.transform[4]-(last.transform[4]+last.width);if(gap>r.h*.15&&!/\s$/.test(line)&&!/^\s/.test(i.str))line+=" "}line+=i.str;last=i});
-      if(py!==null&&py-r.y>r.h*2.4)out.push("");out.push(line);py=r.y});
-    out.push("")}
-  return out.join("\n")}
-const FLD=[["name","שם המתכון","t"],["type","סוג","s",["חלבי","בשרי","פרווה"]],["taste","טעם","s",["מלוח","מתוק"]],["category","קטגוריה","t"],["servings","כמות / מנות","t"],["prep","הכנה (דק׳)","n"],["cook","בישול (דק׳)","n"],["bake","אפייה (דק׳)","n"],["temp","תנור (°C)","n"],["ingredients","מרכיבים (שורה לכל מרכיב)","a"],["steps","אופן ההכנה (שורה לכל שלב)","a"],["notes","הערות / מקור","a"]];
-const pfields=(r,i)=>FLD.map(([k,l,t,o])=>{const id="pf"+i+"_"+k,v=esc(r[k]??""),full=t==="a"||k==="name"?" full":"";
-  return `<div class="f${full}"><label for="${id}">${l}</label>${t==="s"?`<select id="${id}" data-pf="${k}" data-pi="${i}">${o.map(x=>`<option${x===r[k]?" selected":""}>${x}</option>`).join("")}</select>`:t==="a"?`<textarea id="${id}" data-pf="${k}" data-pi="${i}">${v}</textarea>`:`<input id="${id}" data-pf="${k}" data-pi="${i}" ${t==="n"?'type="number" min="0" ':""}value="${v}">`}</div>`}).join("");
-function importView(){
-  if(!admin){$("app").innerHTML=`<div class="page"><div class="empty"><h3>ייבוא מתכונים זמין למנהלת בלבד</h3><p>כדי להוסיף מתכונים יש להתחבר.</p><button class="btn" onclick="loginForm()">כניסה למנהלת</button></div></div>`;return}
-  $("app").innerHTML=`<div class="page"><h1>ייבוא מתכונים מקובץ PDF</h1>
-  <div class="ibox"><ol><li>בוחרים קובץ PDF אחד או יותר (אפשר לשמור קובץ וורד כ-PDF).</li><li>האתר קורא את הטקסט ומפרק אותו למתכונים. מתכון נגמר בשורה ״בתיאבון״, ובלי שורה כזו כל קובץ נחשב מתכון אחד. השורה הראשונה במתכון היא השם.</li><li>עוברים על התצוגה המקדימה, מתקנים מה שצריך, ושומרים.</li><li>המתכונים יופיעו באתר בתבנית הרגילה, ונשאר רק להוסיף תמונה לכל אחד.</li></ol>
-  <div class="drop" id="pdrop" tabindex="0" role="button"><b>בחירת קובץ PDF</b>לחצי כאן, או גררי קובץ לכאן. אפשר כמה קבצים.</div><input id="pdff" type="file" accept="application/pdf,.pdf" multiple hidden>
-  <details style="margin-top:14px"><summary style="cursor:pointer;font-weight:700">אין PDF, או שהטקסט יצא מבולגן? אפשר להדביק טקסט</summary><div class="f" style="margin-top:10px"><textarea id="ptxt" style="min-height:160px" placeholder="הדביקי כאן מתכונים. שם המתכון בשורה הראשונה, מרכיבים, אופן הכנה, ובסוף שורה ״בתיאבון״."></textarea></div><button class="btn" id="pgo" style="margin-top:8px">קריאת הטקסט</button></details>
-  <p class="sub" id="pst" role="status" style="margin-bottom:0"></p></div><div id="pprev"></div></div>`;
-  const dr=$("pdrop"),fi=$("pdff");
-  dr.onclick=()=>fi.click();dr.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();fi.click()}};
-  fi.onchange=()=>{impRead([...fi.files],"");fi.value=""};
-  ["dragenter","dragover"].forEach(n=>dr.addEventListener(n,e=>{e.preventDefault();dr.classList.add("over")}));
-  ["dragleave","drop"].forEach(n=>dr.addEventListener(n,e=>{e.preventDefault();dr.classList.remove("over")}));
-  dr.addEventListener("drop",e=>impRead([...e.dataTransfer.files].filter(f=>/pdf$/i.test(f.name)||f.type==="application/pdf"),""));
-  $("pgo").onclick=()=>{const t=$("ptxt").value.trim();if(t)impRead([],t)};
-  impPrev()}
-async function impRead(files,pasted){
-  const st=$("pst");st.textContent="קוראת…";
-  try{const out=[];
-    if(pasted)out.push(...parseRecipes(pasted));
-    for(const f of files){st.textContent="קוראת את "+f.name+"…";const p=parseRecipes(await pdfText(f));
-      if(!p.length)throw new Error("לא נמצא טקסט ב-"+f.name+". ייתכן שזה PDF סרוק (תמונה), ואז אי אפשר לקרוא ממנו טקסט.");out.push(...p)}
-    if(!out.length){st.textContent="לא נמצאו מתכונים.";return}
-    const have=new Set(recipes.map(r=>(r.name||"").trim().toLowerCase()));
-    impList=out.map(r=>{const d=have.has(r.name.trim().toLowerCase());return{...r,dup:d,use:!d}});
-    st.textContent="";impPrev();$("pprev").scrollIntoView({behavior:"smooth"})
-  }catch(err){st.textContent="";alert("הקריאה נכשלה: "+errMsg(err))}}
-function impPrev(){const el=$("pprev");if(!el)return;
-  if(!impList.length){el.innerHTML="";return}
-  el.innerHTML=`<div class="ibox" style="position:sticky;top:60px;z-index:5"><div class="hz"><b>נמצאו ${impList.length} מתכונים</b><span class="sub" id="icnt"></span><span style="margin-right:auto"></span><button class="btn2" data-ia="all">בחירת הכול</button><button class="btn2" data-ia="none">ביטול הכול</button><button class="btn" id="psave" data-ia="save"></button></div><p class="sub" style="margin:8px 0 0">לחצי על מתכון כדי לבדוק ולתקן. מתכונים שכבר קיימים באתר לא מסומנים.</p></div>`+
-  impList.map((r,i)=>`<details class="pv${r.dup?" dup":""}"><summary><input type="checkbox" data-pu="${i}" ${r.use?"checked":""} aria-label="שמירת ${esc(r.name)}"><b>${esc(r.name)}</b><span class="sub">${r.ingredients.split("\n").filter(Boolean).length} מרכיבים · ${r.steps.split("\n").filter(Boolean).length} שלבים${r.dup?" · כבר קיים":""}</span></summary><div class="fg">${pfields(r,i)}</div></details>`).join("");
-  impCount()}
-function impCount(){const n=impList.filter(r=>r.use).length;if($("icnt"))$("icnt").textContent=n+" נבחרו";const b=$("psave");if(b){b.textContent="שמירת "+n+" מתכונים";b.disabled=!n}}
-async function impAct(a){
-  if(a==="all"||a==="none"){impList.forEach(r=>r.use=a==="all");impPrev();return}
-  if(a!=="save")return;
-  const sel=impList.filter(r=>r.use&&String(r.name).trim());if(!sel.length)return;
-  const b=$("psave");b.disabled=true;b.textContent="שומרת…";
-  try{const base=Date.now(),rows=sel.map((r,i)=>{const rec={id:"p_"+base+"_"+i+Math.random().toString(36).slice(2,6),created:base+(sel.length-i),photos:[],quick:false,fav:false,tips:""};
-      FLD.forEach(([k])=>rec[k]=String(r[k]??"").trim());return rec});
-    for(let i=0;i<rows.length;i+=25){const {error}=await sb.from("recipes").upsert(rows.slice(i,i+25).map(r=>({recipe_key:r.id,title:r.name||"ללא שם",data:r})),{onConflict:"recipe_key"});if(error)throw error}
-    recipes=[...rows,...recipes];impList=[];filter="nophoto";view="recipes";render();scrollTo({top:0});
-    toast("נוספו "+rows.length+" מתכונים. נשאר להוסיף תמונות")
-  }catch(err){b.disabled=false;impCount();alert("השמירה נכשלה: "+errMsg(err))}}
-document.addEventListener("input",e=>{const t=e.target;if(t.dataset&&t.dataset.pf!==undefined&&impList[+t.dataset.pi])impList[+t.dataset.pi][t.dataset.pf]=t.value});
-document.addEventListener("change",e=>{const t=e.target;if(!t.dataset)return;if(t.dataset.pu!==undefined){impList[+t.dataset.pu].use=t.checked;impCount()}else if(t.dataset.pf!==undefined&&impList[+t.dataset.pi])impList[+t.dataset.pi][t.dataset.pf]=t.value});
-$("qphf").onchange=async e=>{const fl=[...e.target.files];e.target.value="";const r=recipes.find(x=>x.id===qphId);if(!r||!fl.length)return;
-  try{toast("מעלה תמונה…");const data=[];for(const f of fl)data.push(await shrink(f));const urls=await resolvePhotos(data,r.id),nr={...r,photos:[...r.photos,...urls]};await put(nr);r.photos=nr.photos;render();toast("התמונה נוספה")}
-  catch(err){alert("הוספת התמונה נכשלה: "+errMsg(err))}};
-
-/* ---------- טיימר במתכון ---------- */
-const TR={list:[],iv:0,ac:null,wl:null};
-const tfmt=s=>{const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60,p=v=>String(v).padStart(2,"0");return(h?h+":"+p(m):p(m))+":"+p(x)};
-function actx(){try{TR.ac=TR.ac||new (window.AudioContext||window.webkitAudioContext)();if(TR.ac.state==="suspended")TR.ac.resume()}catch(e){}return TR.ac}
-function beep3(){const a=actx();if(a)[0,.3,.6].forEach(o=>{const s=a.createOscillator(),g=a.createGain(),t=a.currentTime+o;s.frequency.value=880;g.gain.setValueAtTime(.35,t);g.gain.exponentialRampToValueAtTime(.001,t+.22);s.connect(g);g.connect(a.destination);s.start(t);s.stop(t+.25)});if(navigator.vibrate)navigator.vibrate([300,150,300])}
-async function wake(){try{if("wakeLock" in navigator&&!TR.wl)TR.wl=await navigator.wakeLock.request("screen")}catch(e){}}
-function unwake(){try{TR.wl&&TR.wl.release()}catch(e){}TR.wl=null}
-function runTick(){if(!TR.iv)TR.iv=setInterval(tick,500);wake()}
-function addTimer(label,min){const secs=Math.round(min*60);if(!(secs>0))return;actx();
-  TR.list.push({id:"t"+Date.now()+Math.random().toString(36).slice(2,5),label,total:secs,left:secs,end:Date.now()+secs*1000,run:true,done:false});
-  runTick();drawTray();toast("הטיימר הופעל: "+label+" ("+tfmt(secs)+")")}
-function tick(){const n=Date.now();TR.list.forEach(t=>{if(!t.run)return;t.left=Math.max(0,Math.ceil((t.end-n)/1000));if(t.left<=0){t.run=false;t.done=true;ring(t);drawTray()}});
-  paintTray();if(!TR.list.some(t=>t.run)){clearInterval(TR.iv);TR.iv=0;unwake()}}
-function ring(t,i=0){if(!TR.list.includes(t)||i>=6)return;beep3();setTimeout(()=>ring(t,i+1),1600)}
-function timerAct(a,id){const t=TR.list.find(x=>x.id===id);if(!t)return;
-  if(a==="x")TR.list=TR.list.filter(x=>x!==t);
-  else if(a==="p"&&!t.done){if(t.run){t.left=Math.max(0,Math.ceil((t.end-Date.now())/1000));t.run=false}else{t.end=Date.now()+t.left*1000;t.run=true;runTick()}}
-  else if(a==="m"){if(t.run)t.end+=60000;else{t.done=false;t.left+=60;t.end=Date.now()+t.left*1000;t.run=true;runTick()}}
-  drawTray();paintTray()}
-function drawTray(){$("tray").innerHTML=TR.list.map(t=>`<div class="tmr${t.done?" done":""}"><span class="tt" data-tt="${t.id}">${tfmt(t.left)}</span><span class="tl2">${t.done?"הסתיים! ":""}${esc(t.label)}</span><button data-ta="m" data-id="${t.id}" aria-label="הוספת דקה">+1</button>${t.done?"":`<button data-ta="p" data-id="${t.id}">${t.run?"השהיה":"המשך"}</button>`}<button data-ta="x" data-id="${t.id}" aria-label="סגירת הטיימר">✕</button></div>`).join("")}
-function paintTray(){TR.list.forEach(t=>{const e=document.querySelector('[data-tt="'+t.id+'"]');if(e)e.textContent=tfmt(t.left)})}
-document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&TR.list.some(t=>t.run)){TR.wl=null;wake();tick()}});
-function stepTimes(x){const out=[],re=/(\d+(?:\.\d+)?)(?:\s*[-–]\s*(\d+(?:\.\d+)?))?\s*[-–]?\s*(דקות|דק'|דק׳|דקה|שעות|שעה)/g;let m;
-  while((m=re.exec(x))){let n=+(m[2]||m[1]);if(/^שע/.test(m[3]))n*=60;if(n>0&&!out.includes(n))out.push(n)}
-  if(!out.length){if(/חצי שעה/.test(x))out.push(30);else if(/שעה וחצי/.test(x))out.push(90);else if(/שעתיים/.test(x))out.push(120);else if(/(?:^|\s)שעה(?=[\s,.]|$)/.test(x))out.push(60)}
-  return out}
-const stepBtns=(x,name,i)=>stepTimes(x).map(n=>`<button class="tbtn" data-tmr="${n}" data-lbl="${esc(name)} · שלב ${i+1}" aria-label="הפעלת טיימר ל-${n} דקות">⏱ ${n>=60&&n%60===0?n/60+" שע׳":n+" דק׳"}</button>`).join("");
-function timerCard(r){const pr=[["הכנה",r.prep],["בישול",r.cook],["אפייה",r.bake]].filter(x=>+x[1]>0);
-  return `<div class="tcard"><h3 style="margin:0 0 10px">טיימר</h3>${pr.length?`<div class="chips">${pr.map(([l,v])=>`<button class="chip" data-tmr="${+v}" data-lbl="${esc(r.name)} · ${l}">${l} ${+v} דק׳ · הפעלה</button>`).join("")}</div>`:""}
-  <div class="hz"><input id="tmin" type="number" min="0.5" step="0.5" inputmode="decimal" placeholder="דקות" aria-label="דקות" style="width:100px"><input id="tlbl" placeholder="שם הטיימר (לא חובה)" aria-label="שם הטיימר" style="flex:1;min-width:140px"><button class="btn" data-tmc data-rn="${esc(r.name)}">הפעלת טיימר</button></div>
-  <p class="sub" style="margin:8px 0 0">אפשר להפעיל כמה טיימרים במקביל. הם נשארים על המסך גם אחרי סגירת המתכון. כפתור ⏱ ליד שלב מפעיל טיימר לזמן שכתוב בו.</p></div>`}
-
 /* ---------- אירועים ---------- */
 document.addEventListener("click",async e=>{
   const tb=e.target.closest("[data-tm],[data-tp]");if(tb){applyTheme(tb.dataset.tm?{mode:tb.dataset.tm}:{palette:tb.dataset.tp});return}
-  const t=e.target.closest("[data-go],[data-f],[data-open],[data-fav],[data-edit],[data-del],[data-close],[data-add],[data-ph],[data-rm],[data-cov],[data-qph],[data-tmr],[data-tmc],[data-ta],[data-ia],.ing");
+  const t=e.target.closest("[data-go],[data-f],[data-open],[data-fav],[data-edit],[data-del],[data-close],[data-add],[data-ph],[data-rm],[data-cov],.ing");
   if(!t){if(!e.target.closest(".mw"))closePops();return}
   const d=t.dataset;
-  if(d.qph){e.stopPropagation();qphId=d.qph;$("qphf").click();return}
-  if(d.tmr){addTimer(d.lbl||"טיימר",+d.tmr);return}
-  if(d.tmc!==undefined){const m=parseFloat($("tmin").value);if(!(m>0)){toast("יש להזין מספר דקות");return}addTimer($("tlbl").value.trim()||d.rn||"טיימר",m);return}
-  if(d.ta){timerAct(d.ta,d.id);return}
-  if(d.ia){impAct(d.ia);return}
   if(d.fav){e.stopPropagation();if(!admin)return;const r=recipes.find(x=>x.id===d.fav);if(!r)return;const nv=!r.fav;
     try{await put({...r,fav:nv});r.fav=nv}catch(err){alert("השמירה נכשלה: "+errMsg(err));return}
     if($("modal").classList.contains("open")&&"keep" in d)show(r.id);render();return}
@@ -696,6 +524,23 @@ $("themeBtn").onclick=e=>{e.stopPropagation();const o=!$("themePop").classList.c
 $("moreBtn").onclick=e=>{e.stopPropagation();$("themePop").classList.remove("open");const o=$("pop").classList.toggle("open");$("moreBtn").setAttribute("aria-expanded",o)};
 $("heroBtn").onclick=()=>{closePops();$("herof").click()};
 $("loginBtn").onclick=()=>{closePops();loginForm()};
+function contactForm(){
+  openModal(`<form id="cf"><div class="bar"><button class="btn2" type="button" data-close>סגירה</button></div>
+  <div class="body"><div class="ct"><h2 class="title">צור קשר</h2>
+  <div class="f"><label for="cn">שם</label><input id="cn" required maxlength="80" autocomplete="name"></div>
+  <div class="f"><label for="ce">האימייל שלך (כדי שאוכל לחזור אלייך)</label><input id="ce" type="email" autocomplete="email"></div>
+  <div class="f"><label for="cm">ההודעה</label><textarea id="cm" required></textarea></div>
+  <button class="btn" type="submit">שליחה באימייל</button>
+  <p class="sub" style="text-align:center;margin-top:12px">לחיצה על שליחה תפתח את תוכנת האימייל שלך עם ההודעה מוכנה.</p></div></div></form>`);
+  $("cn").focus();
+  $("cf").onsubmit=e=>{
+    e.preventDefault();
+    const body=$("cm").value.trim()+"\n\n— "+$("cn").value.trim()+($("ce").value.trim()?"\n"+$("ce").value.trim():"");
+    location.href="mailto:shiramintz2004@gmail.com?subject="+encodeURIComponent("הודעה ממחברת המתכונים")+"&body="+encodeURIComponent(body);
+  };
+}
+$("contactBtn").onclick=()=>{closePops();contactForm()};
+$("contactLink").onclick=contactForm;
 $("outBtn").onclick=async()=>{closePops();if(sb)await sb.auth.signOut();toast("התנתקת")};
 $("herof").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{toast("מעלה תמונה…");await saveHero(await shrink(f,1900));if(view==="home")render();toast("תמונת הרקע עודכנה")}catch(err){alert("לא הצלחנו לשמור את התמונה: "+errMsg(err))}e.target.value=""};
 
