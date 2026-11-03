@@ -524,19 +524,36 @@ $("themeBtn").onclick=e=>{e.stopPropagation();const o=!$("themePop").classList.c
 $("moreBtn").onclick=e=>{e.stopPropagation();$("themePop").classList.remove("open");const o=$("pop").classList.toggle("open");$("moreBtn").setAttribute("aria-expanded",o)};
 $("heroBtn").onclick=()=>{closePops();$("herof").click()};
 $("loginBtn").onclick=()=>{closePops();loginForm()};
+/* ===== שליחת הודעות: להדביק כאן את הקישור מ-Formspree (למשל https://formspree.io/f/abcdwxyz) ===== */
+const CONTACT_ENDPOINT="https://formspree.io/f/xaeeawnq";
+const CONTACT_EMAIL="shiramintz2004@gmail.com";
 function contactForm(){
   openModal(`<form id="cf"><div class="bar"><button class="btn2" type="button" data-close>סגירה</button></div>
   <div class="body"><div class="ct"><h2 class="title">צור קשר</h2>
   <div class="f"><label for="cn">שם</label><input id="cn" required maxlength="80" autocomplete="name"></div>
   <div class="f"><label for="ce">האימייל שלך (כדי שאוכל לחזור אלייך)</label><input id="ce" type="email" autocomplete="email"></div>
   <div class="f"><label for="cm">ההודעה</label><textarea id="cm" required></textarea></div>
-  <button class="btn" type="submit">שליחה באימייל</button>
-  <p class="sub" style="text-align:center;margin-top:12px">לחיצה על שליחה תפתח את תוכנת האימייל שלך עם ההודעה מוכנה.</p></div></div></form>`);
+  <button class="btn" type="submit" id="csub">שליחה</button>
+  <p class="err" id="cerr" role="alert" style="text-align:center"></p>
+  <p class="sub" style="text-align:center">אפשר גם לכתוב ישירות ל-<b dir="ltr">${CONTACT_EMAIL}</b> <button type="button" class="link" id="ccopy">העתקה</button></p></div></div></form>`);
   $("cn").focus();
-  $("cf").onsubmit=e=>{
+  $("ccopy").onclick=async()=>{try{await navigator.clipboard.writeText(CONTACT_EMAIL);toast("כתובת האימייל הועתקה")}catch(e){toast(CONTACT_EMAIL)}};
+  $("cf").onsubmit=async e=>{
     e.preventDefault();
-    const body=$("cm").value.trim()+"\n\n— "+$("cn").value.trim()+($("ce").value.trim()?"\n"+$("ce").value.trim():"");
-    location.href="mailto:shiramintz2004@gmail.com?subject="+encodeURIComponent("הודעה ממחברת המתכונים")+"&body="+encodeURIComponent(body);
+    const name=$("cn").value.trim(),mail=$("ce").value.trim(),msg=$("cm").value.trim();
+    if(!CONTACT_ENDPOINT){
+      location.href="mailto:"+CONTACT_EMAIL+"?subject="+encodeURIComponent("הודעה ממחברת המתכונים")+"&body="+encodeURIComponent(msg+"\n\n— "+name+(mail?"\n"+mail:""));
+      return;
+    }
+    const btn=$("csub");btn.disabled=true;btn.textContent="שולחת…";$("cerr").textContent="";
+    try{
+      const r=await fetch(CONTACT_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({name,email:mail,message:msg,_subject:"הודעה ממחברת המתכונים"})});
+      if(!r.ok)throw new Error();
+      closeModal();toast("ההודעה נשלחה, תודה!");
+    }catch(err){
+      btn.disabled=false;btn.textContent="שליחה";
+      $("cerr").textContent="השליחה נכשלה. נסי שוב או כתבי ישירות לאימייל.";
+    }
   };
 }
 $("contactBtn").onclick=()=>{closePops();contactForm()};
